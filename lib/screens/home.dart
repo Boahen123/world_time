@@ -15,9 +15,17 @@ class _HomeState extends State<Home> {
             child: Column(
       children: <Widget>[
         TextButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.edit_location),
-          label: const Text('go to'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/location');
+          },
+          icon: const Icon(
+            Icons.edit_location,
+            color: Colors.black,
+          ),
+          label: const Text(
+            'Edit Location',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ],
     )));
