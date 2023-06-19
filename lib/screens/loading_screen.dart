@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-import 'dart:convert';
+import 'package:world_clock/widgets/world_time.dart';
 
 var console = Logger();
 
@@ -13,24 +12,32 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  void getData() async {
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
-    var response = await http.get(url);
-    const JsonDecoder decoder = JsonDecoder();
+  String? currentTime = 'loading';
 
-    final Map<String, dynamic> object = decoder.convert(response.body);
-
-    console.d(object['title']);
+  void setupWorldTime() async {
+    WorldTime timeInstance = WorldTime(
+        location: 'Berlin', flag: 'germany.png', endpoint: 'Europe/Berlin');
+    await timeInstance.getTime();
+    console.d(timeInstance.time);
+    setState(() {
+      currentTime = timeInstance.time;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
+    setupWorldTime();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('loading screen'));
+    return Scaffold(
+        body: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Text('$currentTime'),
+      ),
+    ));
   }
 }

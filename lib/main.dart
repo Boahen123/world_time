@@ -13,7 +13,7 @@ void main() {
   };
 
   runApp(MaterialApp(
-    initialRoute: '/home',
+    initialRoute: '/',
     routes: routes,
   ));
 }
