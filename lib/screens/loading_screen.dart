@@ -12,16 +12,18 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  String? currentTime = 'loading';
-
   void setupWorldTime() async {
     WorldTime timeInstance = WorldTime(
         location: 'Berlin', flag: 'germany.png', endpoint: 'Europe/Berlin');
     await timeInstance.getTime();
-    console.d(timeInstance.time);
-    setState(() {
-      currentTime = timeInstance.time;
-    });
+    // console.d(timeInstance.time);
+    if (context.mounted) {
+      Navigator.pushReplacementNamed(context, '/home', arguments: {
+        'location': timeInstance.location,
+        'flag': timeInstance.flag,
+        'time': timeInstance.time,
+      });
+    }
   }
 
   @override
@@ -32,11 +34,11 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Text('$currentTime'),
+        padding: EdgeInsets.all(30.0),
+        child: Text('Loading'),
       ),
     ));
   }
