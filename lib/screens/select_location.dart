@@ -10,33 +10,39 @@ class SelectLocation extends StatefulWidget {
 
 class _SelectLocationState extends State<SelectLocation> {
   var console = Logger();
-  int counter = 0;
+
+  // simulating an asynchrounous network request
+  void getData() async {
+    await Future.delayed(
+      const Duration(seconds: 5),
+      () {
+        console.i('first statement');
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 2), () {
+      console.i('second statement');
+    });
+
+    console.d('synchrounous statement');
+  }
+
   @override
   void initState() {
     super.initState();
-    console.i('initState function ran');
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    console.i('build function ran');
+    // console.i('build function ran');
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Select a Location'),
-          centerTitle: true,
-          backgroundColor: Colors.blue[900],
-          // elevation: 0.0,
-        ),
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  counter += 1;
-                });
-              },
-              child: Text('Counter: $counter')),
-        )));
+      appBar: AppBar(
+        title: const Text('Select a Location'),
+        centerTitle: true,
+        backgroundColor: Colors.blue[900],
+        // elevation: 0.0,
+      ),
+    );
   }
 }
