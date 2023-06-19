@@ -22,10 +22,9 @@ class _HomeState extends State<Home> {
             Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.bottomToTop,
-                  child: const SelectLocation(),
-                  duration: const Duration(seconds: 3),
-                  reverseDuration: const Duration(seconds: 3)),
+                type: PageTransitionType.fade,
+                child: const SelectLocation(),
+              ),
             );
           },
           icon: const Icon(
