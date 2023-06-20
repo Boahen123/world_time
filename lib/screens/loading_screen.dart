@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:world_clock/widgets/world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 var console = Logger();
 
@@ -16,12 +17,13 @@ class _LoadingState extends State<Loading> {
     WorldTime timeInstance = WorldTime(
         location: 'Berlin', flag: 'germany.png', endpoint: 'Europe/Berlin');
     await timeInstance.getTime();
-    // console.d(timeInstance.time);
+
     if (context.mounted) {
       Navigator.pushReplacementNamed(context, '/home', arguments: {
         'location': timeInstance.location,
         'flag': timeInstance.flag,
         'time': timeInstance.time,
+        'isDaytime': timeInstance.isDaytime,
       });
     }
   }
@@ -35,11 +37,13 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: EdgeInsets.all(30.0),
-        child: Text('Loading'),
+      backgroundColor: Colors.blue,
+      body: Center(
+        child: SpinKitFadingCube(
+          color: Colors.white,
+          size: 50.0,
+        ),
       ),
-    ));
+    );
   }
 }
