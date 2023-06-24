@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:world_clock/screens/select_location.dart';
-// import 'package:page_transition/page_transition.dart';
-import 'package:logger/logger.dart';
-
-var console = Logger();
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,7 +16,6 @@ class _HomeState extends State<Home> {
     dataMap = dataMap.isNotEmpty
         ? dataMap
         : ModalRoute.of(context)?.settings.arguments as Map;
-    console.d(dataMap);
 
     // Set background image depending on the time
     String bgImage = dataMap['isDaytime'] ? 'day.png' : 'night.png';
