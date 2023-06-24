@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:logger/logger.dart';
@@ -8,20 +9,20 @@ var console = Logger();
 class WorldTime {
   final String? location; // location for the URI endpoint
   late String? time; // current time in the specified location
-  final String? flag; // url to get a flag icon
   final String? endpoint;
+  final String? country;
   late bool? isDaytime;
 
   WorldTime(
-      {required this.location, required this.flag, required this.endpoint});
+      {required this.location, required this.endpoint, required this.country});
 
-  /// The function retrieves the current time from an API and adjusts it based on the timezone offset.
+  /// This function retrieves the current time from an API and adjusts it based on the timezone,
+  /// and sets a boolean flag to indicate whether it is daytime or nighttime.
   Future<void> getTime() async {
     try {
       // Create url
       final url = Uri.parse('https://worldtimeapi.org/api/timezone/$endpoint');
       var response = await http.get(url);
-
       // decode json
       // const JsonDecoder decoder = JsonDecoder(); // an alternative method
       // final Map<String, dynamic> data = decoder.convert(response.body);
@@ -39,5 +40,16 @@ class WorldTime {
       console.d('Caught error $exception');
       time = 'Could not get time data';
     }
+  }
+
+  /// The function returns a NetworkImage object containing the flag of a country.
+  ///
+  /// Returns:
+  ///   A `NetworkImage` object with the URL of the country's flag image and a scale of 1.0.
+  NetworkImage getFlag() {
+    // get the country's flag
+    String url = 'https://flagsapi.com/$country/flat/64.png';
+    // return NetworkImage(url, scale: 1.0);
+    return NetworkImage(url, scale: 1.0);
   }
 }

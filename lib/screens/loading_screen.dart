@@ -14,14 +14,14 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   void setupWorldTime() async {
-    WorldTime timeInstance = WorldTime(
-        location: 'Berlin', flag: 'germany.png', endpoint: 'Europe/Berlin');
+    WorldTime timeInstance =
+        WorldTime(location: 'Berlin', endpoint: 'Europe/Berlin', country: 'DE');
     await timeInstance.getTime();
 
     if (context.mounted) {
+      // pass data from loading_screen.dart to home
       Navigator.pushReplacementNamed(context, '/home', arguments: {
         'location': timeInstance.location,
-        'flag': timeInstance.flag,
         'time': timeInstance.time,
         'isDaytime': timeInstance.isDaytime,
       });
