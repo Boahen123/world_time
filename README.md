@@ -1,16 +1,30 @@
 # world_clock
 
-A new Flutter project.
+Check the time of various select cities, built with Flutter
 
-## Getting Started
+## Main Screen
 
-This project is a starting point for a Flutter application.
+Show the time of a selected city.
+<br/>
+<br/>
+<img src="./assets/daytime.png" height="400">
 
-A few resources to get you started if this is your first Flutter project:
+## Image changes depending of time of day
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Daytime
+<br/>
+<br/>
+<img src="./assets/daytime.png" height="400">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Nighttime
+<br/>
+<br/>
+<img src="./assets/nightime.png" height="400">
+
+## Choose from a list of cities
+
+Select a city from the list.
+
+# Select a city
+
+<img src="assets/select_location.png" height="400">
